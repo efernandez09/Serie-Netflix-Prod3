@@ -63,6 +63,7 @@ function MyTabs() {
         initialRouteName='Home'
         screenOptions={{
             tabBarActiveTintColor: 'red'
+            
         }}
         >
 
@@ -90,6 +91,7 @@ function MyTabs() {
     )
 
 }
+
 
 export default function Navigation() {
     return (
