@@ -1,7 +1,7 @@
 import { useState, useEffect} from 'react';
 import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native'
-import { collection, doc } from 'firebase/firestore';
+import { collection, doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../database/firebase';
 
 const DetailsScreen = ({}) => {
@@ -30,18 +30,24 @@ const DetailsScreen = ({}) => {
             QuerySnapshot.docs.forEach(doc => {
                 // Recogemos cada uno de los actores y hacemos push al array
                 // que hemos declarado anteriormente.
-                actors.push(doc.data());
+                if (doc.data() === name) {
+                    actors.push(doc.data());    
+                } else {
+                    console.log('No se ha podido encontrar el documento');
+                }
             });
 
             // Asignamos al estado el array en el que hemos almacenado todos
             // los actores, para que estos datos sean accesibles para el resto
             // de la pantalla.
-            setActors(actors);
+            SetActorDetails(actors);
 
             // Comprobamos que recogemos correctamente los actores de la bbdd
             // console.log(actors)
 
-        }),
+        })
+
+        console.log(actorDetails)
 
 
     }, [])
