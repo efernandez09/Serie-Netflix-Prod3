@@ -30,31 +30,49 @@ const DetailsScreen = ({}) => {
             QuerySnapshot.docs.forEach(doc => {
                 // Recogemos cada uno de los actores y hacemos push al array
                 // que hemos declarado anteriormente.
-                if (doc.data() === name) {
-                    actors.push(doc.data());    
-                } else {
-                    console.log('No se ha podido encontrar el documento');
-                }
+                actors.push(doc.data());
+
             });
 
+            
+            // Buscamos el registro dentro de la bbdd que tenga el nombre igual
+            // al que le hemos pasado mediante el componente Actors
+            const actorDet = actors.find(actor => actor.name === name)
+            
             // Asignamos al estado el array en el que hemos almacenado todos
             // los actores, para que estos datos sean accesibles para el resto
             // de la pantalla.
-            SetActorDetails(actors);
+            SetActorDetails(actorDet)
 
-            // Comprobamos que recogemos correctamente los actores de la bbdd
-            // console.log(actors)
 
         })
-
-        console.log(actorDetails)
-
 
     }, [])
 
     return(
         <View>
-            <Text style={style.title}> {name} </Text>
+            <Image
+                source={{ uri: actorDetails.image }}
+                style={{ height: 200, width: '100%' }}
+                resizeMode="cover"
+            />
+            <View style={{ padding: 10 }}>
+                <Text style={{ fontWeight: 'bold' }}>Name:</Text>
+                <Text>{actorDetails.name}</Text>
+            </View>
+            <View style={{ padding: 10 }}>
+                <Text style={{ fontWeight: 'bold' }}>Age:</Text>
+                <Text>{actorDetails.bornDate}</Text>
+            </View>
+            <View style={{ padding: 10 }}>
+                <Text style={{ fontWeight: 'bold' }}>Nationality:</Text>
+                <Text>{actorDetails.nationality}</Text>
+            </View>
+            <View style={{ padding: 10 }}>
+            <Text style={{ fontWeight: 'bold' }}>Hobbies:</Text>
+            <Text>{actorDetails.hobbies}</Text>
+            </View>
+
 
             {/* Navegación a details */}
 
