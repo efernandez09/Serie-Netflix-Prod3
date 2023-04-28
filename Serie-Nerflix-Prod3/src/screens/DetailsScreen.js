@@ -51,11 +51,11 @@ const DetailsScreen = ({}) => {
 
     return(
         <View>
-            <Image
+            {/* <Image
                 source={{ uri: actorDetails.image }}
                 style={{ height: 200, width: '100%' }}
                 resizeMode="cover"
-            />
+            /> */}
             <View style={{ padding: 10 }}>
                 <Text style={{ fontWeight: 'bold' }}>Name:</Text>
                 <Text>{actorDetails.name}</Text>
@@ -78,7 +78,7 @@ const DetailsScreen = ({}) => {
 
             <TouchableOpacity 
             style={style.button}
-            // onPress={() => navigation.navigate('Player')}
+            onPress={() => navigation.navigate('Player')}
             > 
                 <Text style={style.buttonText}> 
                     View Player 
