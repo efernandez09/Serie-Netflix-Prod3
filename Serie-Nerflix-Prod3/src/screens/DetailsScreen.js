@@ -1,5 +1,5 @@
 import { useState, useEffect} from 'react';
-import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { collection, doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../database/firebase';
@@ -51,17 +51,17 @@ const DetailsScreen = ({}) => {
 
     return(
         <View>
-            {/* <Image
+            <Image
                 source={{ uri: actorDetails.image }}
                 style={{ height: 200, width: '100%' }}
                 resizeMode="cover"
-            /> */}
+            />
             <View style={{ padding: 10 }}>
-                <Text style={{ fontWeight: 'bold' }}>Name:</Text>
+                <Text style={{ fontWeight: 'bold' }}>Nombre:</Text>
                 <Text>{actorDetails.name}</Text>
             </View>
             <View style={{ padding: 10 }}>
-                <Text style={{ fontWeight: 'bold' }}>Age:</Text>
+                <Text style={{ fontWeight: 'bold' }}>Fecha Nacimiento:</Text>
                 <Text>{actorDetails.bornDate}</Text>
             </View>
             <View style={{ padding: 10 }}>
@@ -69,8 +69,12 @@ const DetailsScreen = ({}) => {
                 <Text>{actorDetails.nationality}</Text>
             </View>
             <View style={{ padding: 10 }}>
-            <Text style={{ fontWeight: 'bold' }}>Hobbies:</Text>
-            <Text>{actorDetails.hobbies}</Text>
+                <Text style={{ fontWeight: 'bold' }}>Descripción:</Text>
+                <Text>{actorDetails.long_description}</Text>
+            </View>
+            <View style={{ padding: 10 }}>
+                <Text style={{ fontWeight: 'bold' }}>Hobbies:</Text>
+                <Text>{actorDetails.hobbies}</Text>
             </View>
 
 
@@ -102,10 +106,16 @@ const style = StyleSheet.create({
     button: {
         backgroundColor: 'gray',
         padding: 10,
-        marginTop: '20%',
+        marginTop: '5%',
         width: '50%',
         alignSelf: 'center',
         borderRadius: 10
+    },
+    
+    container: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 
     buttonText: {
