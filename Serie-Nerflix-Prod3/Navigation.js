@@ -22,6 +22,15 @@ const Stack = createNativeStackNavigator();
 function MyStack() {
     return (
         <Stack.Navigator
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: 'gray',
+                },
+                headerTintColor: '#fff',
+                headerTitleStyle: {
+                    fontWeight: 'bold',
+                },
+            }}
             initialRouteName='ActorsHome'
 
         >
@@ -29,18 +38,22 @@ function MyStack() {
             name='ActorsHome' 
             component={ActorsScreen}
             options={{
-                headerShown: false
+                headerShown: false,
+                
             }}
             />
             
             <Stack.Screen 
             name='Details' 
             component={DetailsScreen}
+            options={{title: 'Detalles'
+            }}
             />
             
             <Stack.Screen 
             name='Player' 
             component={PlayerScreen}
+            options={{title: 'Reproductor'}}
             />
         
         </Stack.Navigator>
