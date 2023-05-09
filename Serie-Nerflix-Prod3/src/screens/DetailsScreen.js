@@ -1,5 +1,5 @@
 import { useState, useEffect} from 'react';
-import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView} from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { collection, doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../database/firebase';
@@ -30,37 +30,59 @@ const DetailsScreen = ({}) => {
             QuerySnapshot.docs.forEach(doc => {
                 // Recogemos cada uno de los actores y hacemos push al array
                 // que hemos declarado anteriormente.
-                if (doc.data() === name) {
-                    actors.push(doc.data());    
-                } else {
-                    console.log('No se ha podido encontrar el documento');
-                }
+                actors.push(doc.data());
+
             });
 
+            
+            // Buscamos el registro dentro de la bbdd que tenga el nombre igual
+            // al que le hemos pasado mediante el componente Actors
+            const actorDet = actors.find(actor => actor.name === name)
+            
             // Asignamos al estado el array en el que hemos almacenado todos
             // los actores, para que estos datos sean accesibles para el resto
             // de la pantalla.
-            SetActorDetails(actors);
+            SetActorDetails(actorDet)
 
-            // Comprobamos que recogemos correctamente los actores de la bbdd
-            // console.log(actors)
 
         })
-
-        console.log(actorDetails)
-
 
     }, [])
 
     return(
-        <View>
-            <Text style={style.title}> {name} </Text>
+        <ScrollView>
+            <Image
+                source={{ uri: actorDetails.image }}
+                style={{ height: 200, width: '100%' }}
+                resizeMode="cover"
+            />
+            <View style={{ padding: 10 }}>
+                <Text style={{ fontWeight: 'bold' }}>Nombre:</Text>
+                <Text>{actorDetails.name}</Text>
+            </View>
+            <View style={{ padding: 10 }}>
+                <Text style={{ fontWeight: 'bold' }}>Fecha Nacimiento:</Text>
+                <Text>{actorDetails.bornDate}</Text>
+            </View>
+            <View style={{ padding: 10 }}>
+                <Text style={{ fontWeight: 'bold' }}>Nationality:</Text>
+                <Text>{actorDetails.nationality}</Text>
+            </View>
+            <View style={{ padding: 10 }}>
+                <Text style={{ fontWeight: 'bold' }}>Descripción:</Text>
+                <Text>{actorDetails.long_description}</Text>
+            </View>
+            <View style={{ padding: 10 }}>
+                <Text style={{ fontWeight: 'bold' }}>Hobbies:</Text>
+                <Text>{actorDetails.hobbies}</Text>
+            </View>
+
 
             {/* Navegación a details */}
 
             <TouchableOpacity 
             style={style.button}
-            // onPress={() => navigation.navigate('Player')}
+            onPress={() => navigation.navigate('Player')}
             > 
                 <Text style={style.buttonText}> 
                     View Player 
@@ -68,7 +90,7 @@ const DetailsScreen = ({}) => {
             
             </TouchableOpacity>
             
-        </View>
+        </ScrollView>
     );
 
 }
@@ -84,10 +106,16 @@ const style = StyleSheet.create({
     button: {
         backgroundColor: 'gray',
         padding: 10,
-        marginTop: '20%',
+        marginTop: '5%',
         width: '50%',
         alignSelf: 'center',
         borderRadius: 10
+    },
+    
+    container: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 
     buttonText: {
