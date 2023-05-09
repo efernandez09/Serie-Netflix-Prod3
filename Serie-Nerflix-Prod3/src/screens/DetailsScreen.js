@@ -1,5 +1,5 @@
 import { useState, useEffect} from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView} from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { collection, doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../database/firebase';
@@ -50,7 +50,7 @@ const DetailsScreen = ({}) => {
     }, [])
 
     return(
-        <View>
+        <ScrollView>
             <Image
                 source={{ uri: actorDetails.image }}
                 style={{ height: 200, width: '100%' }}
@@ -90,7 +90,7 @@ const DetailsScreen = ({}) => {
             
             </TouchableOpacity>
             
-        </View>
+        </ScrollView>
     );
 
 }
