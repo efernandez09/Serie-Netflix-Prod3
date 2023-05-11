@@ -44,7 +44,6 @@ const ActorsScreen = () => {
 
     const handleActorPress = (name) => {
         navigation.navigate('Details', {name});
-        navigation.navigate('Player', {name});
     }
 
     const itemComponent = ({item}) => {
