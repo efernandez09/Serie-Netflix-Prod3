@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   },
   video: {
     width: '100%',
-    height: 300,
+    height: '45%',
   },
   slider: {
     width: '100%',
