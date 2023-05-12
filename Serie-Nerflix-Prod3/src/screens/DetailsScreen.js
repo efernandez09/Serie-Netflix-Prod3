@@ -49,6 +49,11 @@ const DetailsScreen = ({}) => {
 
     }, [])
 
+
+    const handleActorPress = (name) => {
+        navigation.navigate('Player', {name});
+    }
+
     return(
         <ScrollView>
             <Image
@@ -82,7 +87,7 @@ const DetailsScreen = ({}) => {
 
             <TouchableOpacity 
             style={style.button}
-            onPress={() => navigation.navigate('Player')}
+            onPress={() => handleActorPress(actorDetails.name)}
             > 
                 <Text style={style.buttonText}> 
                     View Player 
